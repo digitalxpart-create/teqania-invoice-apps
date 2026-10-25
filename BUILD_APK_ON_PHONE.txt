@@ -1,0 +1,13 @@
+BUILD APK USING YOUR ANDROID PHONE (NO COMPUTER)
+
+This ZIP is source code plus an automatic GitHub build workflow. It is NOT itself an APK.
+
+1. Open github.com in Chrome and sign in/create a free account.
+2. Create a NEW repository named TeqaniaInvoice. Set it to Public for the easiest setup, and create it.
+3. Upload all files and folders from this ZIP to the repository's main branch. IMPORTANT: include the hidden .github/workflows/build-apk.yml file. If GitHub's web upload does not let you upload the whole folder structure from a phone, use GitHub's Codespaces or another browser-based Git tool.
+4. Open the repository's Actions tab.
+5. Select “Build Teqania Invoice APK” and tap “Run workflow” (or wait for the push build to start).
+6. Wait until the workflow completes successfully. Open that run and download the artifact named “TeqaniaInvoice-debug-apk”.
+7. Extract the downloaded artifact ZIP. It contains app-debug.apk. Tap it to install; Android may ask permission to install unknown apps.
+
+If the build fails, open the failed workflow and share a screenshot of the error so it can be fixed.

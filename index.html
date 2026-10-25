@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#082a55">
+<title>AL TEQANIA Invoice & Quotation</title>
+<style>
+:root{--navy:#082a55;--gold:#e5a514;--bg:#eef2f6;--ink:#27313c}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font:14px Arial,sans-serif;color:var(--ink)}button,input,textarea,select{font:inherit}
+.app{max-width:1250px;margin:auto;padding:12px}.top{background:var(--navy);color:white;border-radius:14px;padding:16px;display:flex;justify-content:space-between;gap:12px;align-items:center}.brand{font-size:20px;font-weight:800}.gold{color:var(--gold)}.small{font-size:11px;opacity:.85;line-height:1.5}
+.layout{display:grid;grid-template-columns:390px minmax(0,1fr);gap:14px;margin-top:14px}.panel,.paper{background:white;border-radius:14px;padding:16px;box-shadow:0 5px 18px #0001;min-width:0}.paper{min-height:900px}
+h3{margin:0 0 10px;color:var(--navy)}label{display:block;font-size:11px;font-weight:bold;color:#66717d;margin:9px 0 4px}
+input,textarea,select{width:100%;padding:10px;border:1px solid #d5dce4;border-radius:7px;background:#fff;color:#222}textarea{min-height:56px;resize:vertical}.row{display:flex;gap:8px}.row>*{flex:1;min-width:0}
+button{border:0;border-radius:8px;padding:10px 12px;font-weight:bold;cursor:pointer}.primary{background:var(--navy);color:#fff}.goldbtn{background:var(--gold);color:var(--navy)}.light{background:#edf1f5;color:var(--navy)}.danger{background:#fee;color:#a22}.actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.items-wrap,.preview-wrap{overflow-x:auto}.items{width:100%;min-width:360px;border-collapse:collapse;font-size:11px}.items th{background:var(--navy);color:white;padding:7px}.items td{padding:5px;border-bottom:1px solid #e3e8ed}.items input{padding:7px;min-width:45px}.num{text-align:right}.head{display:flex;justify-content:space-between;gap:10px;border-bottom:3px solid var(--gold);padding-bottom:12px}.company{font-size:22px;font-weight:800;color:var(--navy)}.title{font-size:27px;font-weight:800;color:var(--navy);text-align:right}
+.meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;background:#f5f7fa;padding:12px;margin:14px 0;font-size:11px;border-radius:8px;overflow-wrap:anywhere}.preview{width:100%;border-collapse:collapse;font-size:11px}.preview th{background:var(--navy);color:#fff;padding:9px;text-align:left}.preview td{padding:9px;border-bottom:1px solid #e4e8ed;overflow-wrap:anywhere}
+.summary{max-width:350px;margin:15px 0 0 auto}.sum{display:flex;justify-content:space-between;gap:12px;padding:5px}.grand{background:var(--navy);color:white;border-radius:8px;padding:11px;display:flex;justify-content:space-between;gap:10px;font-size:15px;font-weight:800}
+.section{margin-top:18px}.section h4{color:var(--navy);margin:0 0 6px;font-size:12px}.section p{font-size:11px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
+.saved-box{margin-top:18px;border-top:1px solid #e1e6eb;padding-top:15px}.saved-list{display:flex;flex-direction:column;gap:7px}.saved-card{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px;border:1px solid #dfe5eb;border-radius:8px;background:#f8fafc;font-size:11px}.saved-card small{color:#687482}.saved-actions{display:flex;gap:5px}.saved-actions button{padding:7px 9px;font-size:10px}.empty-saved{font-size:11px;color:#76818d;padding:8px 0}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:9px}.chip{background:#edf1f5;color:var(--navy);border:1px solid #d9e0e7;border-radius:16px;padding:6px 9px;font-size:10px}
+.footer{text-align:center;border-top:1px solid #ddd;margin-top:26px;padding-top:12px;font-size:9px;color:#66717d}.tabs{display:flex;gap:7px;margin-bottom:12px}.tabs button{flex:1}.active{background:var(--gold);color:var(--navy)}
+@media(max-width:850px){.app{padding:8px}.layout{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}.paper{padding:12px;min-height:auto}.company{font-size:18px}.title{font-size:22px}.panel{padding:13px}}
+@media(max-width:420px){.row{gap:6px}.head{gap:6px}.company{font-size:16px}.title{font-size:20px}.meta{grid-template-columns:1fr}.preview{font-size:10px}.preview th,.preview td{padding:6px}}
+@media print{body{background:#fff!important}.top,.panel{display:none!important}.app{padding:0!important;max-width:none!important}.layout{display:block!important}.paper{display:block!important;box-shadow:none!important;border-radius:0!important;padding:10mm!important;min-height:297mm!important}@page{size:A4;margin:0}}
+</style>
+</head>
+<body><div class="app">
+<header class="top"><div><div class="brand">AL TEQANIA <span class="gold">BUILDINGS MAINTENANCE L.L.C.</span></div><div class="small">Office No. 033, Nuaimeya 2, Ajman, UAE</div></div><div class="small">+971 589 679544 · +971 554 769 170<br>info@alteqaniabm.com</div></header>
+<div class="layout">
+<section class="panel">
+<div class="tabs"><button id="invoiceTab" class="active" type="button">Invoice</button><button id="quoteTab" class="light" type="button">Quotation</button></div>
+<h3 id="formHeading">Invoice Generator</h3>
+<div class="row"><div><label>Document No.</label><input id="docNo"></div><div><label>Date</label><input id="date" type="date"></div></div>
+<div class="row"><div><label>Due / Valid Until</label><input id="due" type="date"></div><div><label>Currency</label><select id="currency"><option>AED</option><option>USD</option><option>EUR</option></select></div></div>
+<label>Client Name</label><input id="client" placeholder="Client / Company Name">
+<label>Client Phone</label><input id="phone" placeholder="+971 ...">
+<label>Project / Location</label><textarea id="location" placeholder="Ajman, UAE"></textarea>
+<h3 style="margin-top:18px">Items / Services</h3><div class="small" style="color:#66717d;margin-bottom:8px">Descriptions are remembered on this device for future suggestions.</div>
+<div id="descriptionLibrary" class="chips"></div>
+<div class="items-wrap"><table class="items"><thead><tr><th>Description</th><th>Qty</th><th>Rate</th><th>Amount</th><th></th></tr></thead><tbody id="items"></tbody></table></div>
+<button type="button" class="light" id="addBtn" style="margin-top:8px">+ Add Item</button>
+<div class="row"><div><label>VAT %</label><input id="vat" type="number" value="5" min="0" step=".01"></div><div><label>Discount</label><input id="discount" type="number" value="0" min="0" step=".01"></div></div>
+<label>Payment Terms</label><input id="terms" value="50% advance, 50% on completion">
+<label>Notes</label><textarea id="notes" placeholder="Thank you for your business."></textarea>
+<div class="actions"><button type="button" class="light" id="viewBtn">View</button><button type="button" class="primary" id="saveBtn">Save</button><button type="button" class="goldbtn" id="printBtn">Print / PDF</button><button type="button" class="light" id="newBtn">New</button><button type="button" class="light" id="waBtn">WhatsApp</button><button type="button" class="light" id="exportBtn">Backup Data</button><button type="button" class="light" id="importBtn">Restore Data</button><input type="file" id="importFile" accept="application/json" hidden></div>
+<div class="saved-box"><h3>Saved Documents</h3><div id="savedList" class="saved-list"></div></div>
+</section>
+<section class="paper" id="preview">
+<div class="head"><div><div class="company">AL TEQANIA</div><b>BUILDINGS MAINTENANCE L.L.C.</b><div class="small" style="color:#66717d">Office No. 033, Nuaimeya 2, Ajman, UAE<br>+971 589 679544 · +971 554 769 170<br>info@alteqaniabm.com</div></div><div class="title"><span id="pdocType">INVOICE</span><br><span class="small" style="color:#66717d">WE MAINTAIN, YOU RELAX</span></div></div>
+<div class="meta"><div><b>Document No:</b> <span id="pno"></span><br><b>Date:</b> <span id="pdate"></span><br><b>Due / Valid Until:</b> <span id="pdue"></span></div><div><b>Bill To:</b> <span id="pclient"></span><br><b>Phone:</b> <span id="pphone"></span><br><b>Project / Location:</b> <span id="plocation"></span></div></div>
+<div class="preview-wrap"><table class="preview"><thead><tr><th>Description</th><th>Qty</th><th>Rate</th><th>Amount</th></tr></thead><tbody id="previewItems"></tbody></table></div>
+<div class="summary"><div class="sum"><span>Subtotal</span><b id="psub">AED 0.00</b></div><div class="sum"><span>Discount</span><b id="pdisc">AED 0.00</b></div><div class="sum"><span>VAT</span><b id="pvat">AED 0.00</b></div><div class="grand"><span>Grand Total</span><span id="ptotal">AED 0.00</span></div></div>
+<div class="section"><h4>PAYMENT TERMS</h4><p id="pterms"></p></div><div class="section"><h4>NOTES</h4><p id="pnotes"></p></div>
+<div style="margin-top:45px;font-size:10px"><b>For AL TEQANIA BUILDINGS MAINTENANCE L.L.C.</b><br><br>Authorized Signature: __________________________</div>
+<div class="footer">Thank you for your business.<br>AL TEQANIA BUILDINGS MAINTENANCE L.L.C. · Ajman, UAE · +971 589 679544 · +971 554 769 170</div>
+</section></div></div>
+<script>
+(()=>{const $=id=>document.getElementById(id);let type='Invoice';
+const read=(k,def=[])=>{try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(def))}catch(e){return def}};
+const write=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+const money=n=>$('currency').value+' '+Number(n||0).toFixed(2);
+function nextNo(){let n=Number(localStorage.getItem('teqania_'+type.toLowerCase()+'_counter')||1);return (type==='Invoice'?'INV-':'QTN-')+String(n).padStart(4,'0')}
+function setType(t){type=t;$('invoiceTab').className=t==='Invoice'?'active':'light';$('quoteTab').className=t==='Quotation'?'active':'light';$('formHeading').textContent=t+' Generator';$('pdocType').textContent=t.toUpperCase();if(!$('docNo').value||$('docNo').value.startsWith('INV-')||$('docNo').value.startsWith('QTN-'))$('docNo').value=nextNo();calc()}
+function addItem(d='',q=1,r=0){const tr=document.createElement('tr');tr.innerHTML='<td><input class="desc" autocomplete="off" placeholder="Service description" value="'+esc(d)+'"></td><td><input class="qty num" type="number" min="0" step=".01" value="'+q+'"></td><td><input class="rate num" type="number" min="0" step=".01" value="'+r+'"></td><td class="amount num">0.00</td><td><button type="button" class="danger remove">×</button></td>';$('items').appendChild(tr);tr.querySelector('.remove').onclick=()=>{tr.remove();calc()};tr.querySelectorAll('input').forEach(el=>{el.addEventListener('input',()=>{if(el.classList.contains('desc'))showChips(el.value);calc()})});tr.querySelector('.desc').addEventListener('focus',e=>showChips(e.target.value));calc()}
+function calc(){let sub=0,out='';document.querySelectorAll('#items tr').forEach(tr=>{let d=tr.querySelector('.desc').value,q=+tr.querySelector('.qty').value||0,r=+tr.querySelector('.rate').value||0,a=q*r;sub+=a;tr.querySelector('.amount').textContent=a.toFixed(2);out+='<tr><td>'+esc(d)+'</td><td>'+q+'</td><td>'+money(r)+'</td><td>'+money(a)+'</td></tr>'});let dis=Math.max(0,+$('discount').value||0),v=Math.max(0,+$('vat').value||0),base=Math.max(0,sub-dis),tax=base*v/100,total=base+tax;$('previewItems').innerHTML=out||'<tr><td colspan="4">No items added</td></tr>';$('psub').textContent=money(sub);$('pdisc').textContent=money(dis);$('pvat').textContent=money(tax);$('ptotal').textContent=money(total);$('pno').textContent=$('docNo').value;$('pdate').textContent=$('date').value;$('pdue').textContent=$('due').value;$('pclient').textContent=$('client').value;$('pphone').textContent=$('phone').value;$('plocation').textContent=$('location').value;$('pterms').textContent=$('terms').value;$('pnotes').textContent=$('notes').value;$('pdocType').textContent=type.toUpperCase()}
+function descriptions(){return read('teqania_descriptions',[])}
+function remember(){let a=descriptions();document.querySelectorAll('#items .desc').forEach(i=>{let s=i.value.trim();if(s&&!a.some(x=>x.toLowerCase()===s.toLowerCase()))a.unshift(s)});write('teqania_descriptions',a.slice(0,100));renderChips()}
+function showChips(term=''){let a=descriptions().filter(x=>x.toLowerCase().includes(term.toLowerCase())).slice(0,20);$('descriptionLibrary').innerHTML=a.map(x=>'<button type="button" class="chip" data-v="'+esc(x)+'">'+esc(x)+'</button>').join('');$('descriptionLibrary').querySelectorAll('button').forEach(b=>b.onclick=()=>{let empty=[...document.querySelectorAll('#items .desc')].find(i=>!i.value.trim());if(empty){empty.value=b.dataset.v;calc()}else addItem(b.dataset.v,1,0)})}
+function renderChips(){showChips()}
+function data(){return {type,docNo:$('docNo').value,date:$('date').value,due:$('due').value,currency:$('currency').value,client:$('client').value,phone:$('phone').value,location:$('location').value,vat:$('vat').value,discount:$('discount').value,terms:$('terms').value,notes:$('notes').value,items:[...document.querySelectorAll('#items tr')].map(tr=>({d:tr.querySelector('.desc').value,q:tr.querySelector('.qty').value,r:tr.querySelector('.rate').value})),total:$('ptotal').textContent}}
+function saved(){return read('teqania_documents',[])}
+function renderSaved(){$('savedList').innerHTML=saved().length?saved().map((x,i)=>'<div class="saved-card"><div><b>'+esc(x.docNo)+'</b><br>'+esc(x.client||'No client')+'<br><small>'+esc(x.date||'')+' · '+esc(x.total||'')+'</small></div><div class="saved-actions"><button class="light open" data-i="'+i+'">Open</button><button class="danger del" data-i="'+i+'">Delete</button></div></div>').join(''):'<div class="empty-saved">No saved documents yet.</div>';$('savedList').querySelectorAll('.open').forEach(b=>b.onclick=()=>loadDoc(+b.dataset.i));$('savedList').querySelectorAll('.del').forEach(b=>b.onclick=()=>{if(confirm('Delete this document?')){let a=saved();a.splice(+b.dataset.i,1);write('teqania_documents',a);renderSaved()}})}
+function save(){remember();let d=data(),a=saved(),i=a.findIndex(x=>x.docNo===d.docNo);if(i>=0)a[i]=d;else a.unshift(d);write('teqania_documents',a);renderSaved();alert(type+' saved on this device.')}
+function loadDoc(i){let d=saved()[i];if(!d)return;setType(d.type||'Invoice');['docNo','date','due','currency','client','phone','location','vat','discount','terms','notes'].forEach((id,j)=>{let k=['docNo','date','due','currency','client','phone','location','vat','discount','terms','notes'][j];if(d[k]!==undefined)$(id).value=d[k]});$('items').innerHTML='';(d.items||[]).forEach(x=>addItem(x.d,x.q,x.r));if(!d.items?.length)addItem();calc();window.scrollTo({top:0,behavior:'smooth'})}
+function fresh(){let key='teqania_'+type.toLowerCase()+'_counter';let n=Number(localStorage.getItem(key)||1);localStorage.setItem(key,n+1);$('docNo').value=nextNo();$('client').value=$('phone').value=$('location').value=$('notes').value='';$('due').value='';$('vat').value='5';$('discount').value='0';$('terms').value='50% advance, 50% on completion';$('items').innerHTML='';addItem();calc()}
+$('invoiceTab').onclick=()=>setType('Invoice');$('quoteTab').onclick=()=>setType('Quotation');$('addBtn').onclick=()=>addItem();$('saveBtn').onclick=save;$('printBtn').onclick=()=>window.print();$('newBtn').onclick=fresh;$('viewBtn').onclick=()=>$('preview').scrollIntoView({behavior:'smooth'});$('waBtn').onclick=()=>window.open('https://wa.me/?text='+encodeURIComponent('AL TEQANIA '+type+' '+$('docNo').value+'\nClient: '+$('client').value+'\nTotal: '+$('ptotal').textContent),'_blank');
+$('exportBtn').onclick=()=>{let blob=new Blob([JSON.stringify({documents:saved(),descriptions:descriptions()},null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='teqania-backup.json';a.click();URL.revokeObjectURL(a.href)};
+$('importBtn').onclick=()=>$('importFile').click();$('importFile').onchange=async e=>{try{let x=JSON.parse(await e.target.files[0].text());if(x.documents)write('teqania_documents',x.documents);if(x.descriptions)write('teqania_descriptions',x.descriptions);renderSaved();renderChips();alert('Backup restored.')}catch(err){alert('Could not read this backup file.')}};
+['docNo','date','due','client','phone','location','currency','vat','discount','terms','notes'].forEach(id=>{ $(id).addEventListener('input',calc);$(id).addEventListener('change',calc)});$('date').value=new Date().toISOString().slice(0,10);$('docNo').value=nextNo();renderChips();addItem();renderSaved();
+})();
+</script></body></html>
